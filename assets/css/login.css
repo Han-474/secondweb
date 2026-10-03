@@ -1,0 +1,238 @@
+/* ============================================================
+   登录页 —— 左侧品牌视觉区 / 右侧表单区
+   ============================================================ */
+
+.login-page {
+  min-height: 100vh; display: flex;
+  background: var(--bg);
+}
+
+/* ---------- 左：品牌区 ---------- */
+.brand {
+  position: relative; overflow: hidden;
+  flex: 1 1 56%; min-width: 0;
+  padding: 46px 52px;
+  display: flex; flex-direction: column; justify-content: space-between;
+  background:
+    radial-gradient(120% 90% at 12% 8%, #3f6fe4 0%, rgba(63,111,228,0) 58%),
+    radial-gradient(90% 80% at 88% 96%, #4fb0dd 0%, rgba(79,176,221,0) 55%),
+    linear-gradient(150deg, #1b3178 0%, #22409a 42%, #2b51c0 100%);
+  color: #fff;
+}
+.brand::after { /* 细网格纹理 */
+  content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .16;
+  background-image:
+    linear-gradient(rgba(255,255,255,.16) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.16) 1px, transparent 1px);
+  background-size: 46px 46px;
+  mask-image: radial-gradient(120% 120% at 30% 20%, #000 15%, transparent 78%);
+}
+
+/* 漂浮光斑 */
+.orb { position: absolute; border-radius: 50%; filter: blur(46px); pointer-events: none; }
+.orb-1 { width: 340px; height: 340px; left: -70px; top: -80px; background: rgba(110,168,255,.42); animation: orb1 19s var(--ease-io) infinite alternate; }
+.orb-2 { width: 300px; height: 300px; right: -60px; bottom: -60px; background: rgba(87,182,227,.38); animation: orb2 23s var(--ease-io) infinite alternate; }
+.orb-3 { width: 190px; height: 190px; left: 46%; top: 52%; background: rgba(150,200,255,.22); animation: orb3 16s var(--ease-io) infinite alternate; }
+@keyframes orb1 { to { transform: translate(70px, 60px) scale(1.14); } }
+@keyframes orb2 { to { transform: translate(-60px, -50px) scale(1.1); } }
+@keyframes orb3 { to { transform: translate(-40px, -70px) scale(.82); } }
+
+.brand > * { position: relative; z-index: 2; }
+
+.brand-top { display: flex; align-items: center; gap: 12px; }
+.brand-top .school { font-size: 15px; font-weight: 700; letter-spacing: .02em; }
+.brand-top .school small { display: block; font-size: 10.5px; font-weight: 500; opacity: .68; letter-spacing: .12em; text-transform: uppercase; }
+
+.crest {
+  width: 46px; height: 46px; flex: none; border-radius: 50%;
+  background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.4);
+  display: grid; place-items: center;
+  box-shadow: 0 4px 14px rgba(0,0,0,.16);
+}
+.crest svg { width: 27px; height: 27px; }
+
+.brand-mid { max-width: 480px; animation: rise .8s var(--ease) both .1s; }
+.brand-mid .eyebrow {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 5px 13px; border-radius: var(--r-pill);
+  background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.22);
+  font-size: 12px; font-weight: 600; letter-spacing: .04em; margin-bottom: 18px;
+}
+.brand-mid .eyebrow i { width: 6px; height: 6px; border-radius: 50%; background: #7fe3c0; box-shadow: 0 0 0 4px rgba(127,227,192,.25); }
+.brand-mid h1 {
+  font-size: clamp(30px, 3.1vw, 46px); line-height: 1.18; font-weight: 800; letter-spacing: -.02em;
+  margin-bottom: 14px;
+}
+.brand-mid h1 em {
+  font-style: normal;
+  background: linear-gradient(100deg, #a9d8ff, #7fe3c0);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.brand-mid p.lead { font-size: 14.5px; line-height: 1.8; opacity: .78; max-width: 420px; }
+
+.chips { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 26px; }
+.chip {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 7px 13px; border-radius: var(--r-pill);
+  background: rgba(255,255,255,.11); border: 1px solid rgba(255,255,255,.18);
+  font-size: 12.5px; font-weight: 500;
+  transition: transform var(--t) var(--ease), background var(--t) var(--ease);
+}
+.chip:hover { transform: translateY(-3px); background: rgba(255,255,255,.2); }
+.chip svg { width: 14px; height: 14px; opacity: .85; }
+.chip:nth-child(1) { animation: float 7s ease-in-out infinite; }
+.chip:nth-child(2) { animation: float 7s ease-in-out infinite .5s; }
+.chip:nth-child(3) { animation: float 7s ease-in-out infinite 1s; }
+.chip:nth-child(4) { animation: float 7s ease-in-out infinite 1.5s; }
+.chip:nth-child(5) { animation: float 7s ease-in-out infinite 2s; }
+.chip:nth-child(6) { animation: float 7s ease-in-out infinite 2.5s; }
+@keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+
+.brand-bottom { display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+.motto { font-size: 13px; letter-spacing: .28em; opacity: .72; font-weight: 500; }
+.brand-stats { display: flex; gap: 26px; }
+.brand-stats div { text-align: left; }
+.brand-stats .v { font-size: 21px; font-weight: 700; letter-spacing: -.01em; }
+.brand-stats .k { font-size: 11.5px; opacity: .62; }
+
+/* ---------- 右：表单区 ---------- */
+.auth {
+  flex: 0 0 468px; max-width: 468px;
+  background: var(--surface);
+  display: flex; flex-direction: column;
+  padding: 40px 46px;
+  overflow-y: auto;
+  box-shadow: -20px 0 60px rgba(27,49,120,.07);
+}
+.auth-inner { width: 100%; max-width: 330px; margin: auto; animation: rise .7s var(--ease) both; }
+
+.auth h2 { font-size: 24px; font-weight: 800; color: var(--ink-900); letter-spacing: -.015em; }
+.auth .hello { font-size: 13px; color: var(--ink-400); margin-top: 7px; }
+
+.role-tabs {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px;
+  margin: 24px 0 22px; padding: 4px;
+  background: var(--bg-soft); border-radius: var(--r-md);
+}
+.role-tabs button {
+  padding: 9px 4px; border-radius: var(--r-sm);
+  font-size: 13px; font-weight: 600; color: var(--ink-500);
+  transition: all var(--t) var(--ease);
+}
+.role-tabs button:hover { color: var(--b-700); }
+.role-tabs button.on {
+  background: var(--surface); color: var(--b-700); box-shadow: var(--sh-1);
+}
+.role-tabs button.on::after {
+  content: ""; display: block; width: 16px; height: 2.5px; border-radius: 2px;
+  margin: 5px auto 0; background: linear-gradient(90deg, var(--b-600), var(--cyan-400));
+}
+
+.stack { display: flex; flex-direction: column; gap: 14px; }
+
+.pwd-wrap { position: relative; }
+.pwd-wrap .input { padding-right: 42px; }
+.pwd-toggle {
+  position: absolute; right: 6px; top: 50%; transform: translateY(-50%);
+  width: 30px; height: 30px; display: grid; place-items: center;
+  border-radius: var(--r-xs); color: var(--ink-300);
+  transition: color var(--t-fast), background var(--t-fast);
+}
+.pwd-toggle:hover { color: var(--b-600); background: var(--b-50); }
+.pwd-toggle svg { width: 17px; height: 17px; }
+
+.captcha-row { display: flex; gap: 10px; }
+.captcha-pic {
+  flex: none; width: 108px; height: 38px; border-radius: var(--r-sm);
+  border: 1px solid var(--line-2); background: var(--b-50); cursor: pointer;
+  display: grid; place-items: center; position: relative; overflow: hidden;
+  user-select: none;
+}
+.captcha-pic svg { width: 100%; height: 100%; }
+.captcha-pic .refresh {
+  position: absolute; right: 3px; bottom: 3px; width: 17px; height: 17px;
+  color: var(--b-500); background: rgba(255,255,255,.9); border-radius: 50%;
+  display: grid; place-items: center;
+}
+.captcha-pic .refresh svg { width: 11px; height: 11px; }
+.captcha-pic:hover .refresh svg { animation: spin .6s var(--ease); }
+
+.err-tip {
+  display: none; align-items: center; gap: 6px;
+  margin-top: 14px; padding: 9px 12px; border-radius: var(--r-sm);
+  background: var(--err-bg); color: #b23f3b; font-size: 12.5px; font-weight: 500;
+  animation: rise-sm .3s var(--ease);
+}
+.err-tip.show { display: flex; }
+.err-tip svg { width: 15px; height: 15px; flex: none; }
+
+.auth-meta { display: flex; align-items: center; justify-content: space-between; margin: 4px 0 20px; }
+
+.demo-box {
+  margin-top: 22px; border: 1px dashed var(--b-300); border-radius: var(--r-md);
+  background: linear-gradient(180deg, var(--b-50), rgba(243,247,255,.35));
+  overflow: hidden;
+}
+.demo-box > .dh {
+  display: flex; align-items: center; gap: 7px;
+  padding: 9px 13px; font-size: 12px; font-weight: 700; color: var(--b-700);
+  border-bottom: 1px dashed var(--b-200);
+}
+.demo-box > .dh svg { width: 14px; height: 14px; }
+.demo-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 13px; cursor: pointer; width: 100%; text-align: left;
+  transition: background var(--t-fast) var(--ease);
+  border-bottom: 1px solid rgba(203,223,255,.5);
+}
+.demo-item:last-child { border-bottom: 0; }
+.demo-item:hover { background: #fff; }
+.demo-item .avatar {
+  width: 28px; height: 28px; border-radius: 9px; flex: none;
+  display: grid; place-items: center; font-size: 11.5px; font-weight: 700; color: #fff;
+  background: linear-gradient(135deg, var(--b-600), var(--cyan-400));
+}
+.demo-item .who { flex: 1; min-width: 0; }
+.demo-item .who b { display: block; font-size: 12.5px; color: var(--ink-800); font-weight: 600; }
+.demo-item .who span { font-size: 11.5px; color: var(--ink-400); font-family: var(--font-num); }
+.demo-item .fill {
+  font-size: 11.5px; font-weight: 600; color: var(--b-600); opacity: 0;
+  transition: opacity var(--t-fast) var(--ease);
+}
+.demo-item:hover .fill { opacity: 1; }
+
+.auth-foot {
+  margin-top: 22px; padding-top: 16px; border-top: 1px solid var(--line);
+  font-size: 11.5px; color: var(--ink-300); line-height: 1.7;
+  display: flex; flex-direction: column; gap: 6px;
+}
+.auth-foot .links { display: flex; gap: 14px; flex-wrap: wrap; }
+.auth-foot a:hover { text-decoration: underline; }
+
+/* 加载遮罩 */
+.boot-veil {
+  position: fixed; inset: 0; z-index: 950; display: grid; place-items: center;
+  background: linear-gradient(150deg, #22409a, #2b51c0 60%, #3a68dd);
+  color: #fff; animation: fade .3s var(--ease);
+}
+.boot-veil .ring { width: 40px; height: 40px; border-radius: 50%;
+  border: 3px solid rgba(255,255,255,.28); border-top-color: #fff; animation: spin .8s linear infinite; margin: 0 auto 14px; }
+.boot-veil .txt { text-align: center; font-size: 13px; letter-spacing: .05em; opacity: .9; }
+
+/* ---------- 响应式 ---------- */
+@media (max-width: 1080px) {
+  .auth { flex-basis: 420px; padding: 34px 34px; }
+  .brand { padding: 36px 34px; }
+}
+@media (max-width: 900px) {
+  .login-page { flex-direction: column; }
+  .brand { flex: none; padding: 28px 24px; min-height: 260px; }
+  .brand-mid h1 { font-size: 27px; }
+  .chips { display: none; }
+  .brand-bottom { display: none; }
+  .auth { flex: 1; max-width: none; padding: 30px 24px 40px; box-shadow: none; }
+  .auth-inner { max-width: 360px; }
+}
+@media (max-width: 520px) {
+  .auth { padding: 24px 18px 34px; }
+}

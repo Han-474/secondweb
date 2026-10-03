@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>教务管理系统 · 河南师范大学</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%232b51c0'/%3E%3Cpath d='M8 21c3.2-2.6 6.4-2.6 8 0 1.6-2.6 4.8-2.6 8 0' stroke='%23fff' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3Cpath d='M16 10v8' stroke='%237fe3c0' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/app.css">
+</head>
+<body>
+
+<div class="app-shell">
+
+  <!-- ============ 侧边栏 ============ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sb-brand">
+      <div class="sb-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 19c2.6-2.1 5.2-2.1 6.5 0 1.3-2.1 3.9-2.1 6.5 0"/>
+          <path d="M12 5.5 9.6 7.1v3.3c0 1.6 1 2.9 2.4 3.5 1.4-.6 2.4-1.9 2.4-3.5V7.1z"/>
+        </svg>
+      </div>
+      <div class="sb-title">
+        <b>教务管理系统</b>
+        <span>HENAN NORMAL UNIV.</span>
+      </div>
+    </div>
+
+    <nav class="sb-nav" id="sbNav"></nav>
+
+    <div class="sb-foot">
+      <div class="term-card">
+        <div class="t1">当前学期</div>
+        <div class="t2" id="termName">2026 秋</div>
+        <div class="t3" id="termWeek">第 6 周 / 共 19 周</div>
+      </div>
+    </div>
+  </aside>
+
+  <div class="scrim" id="scrim"></div>
+
+  <!-- ============ 主区 ============ -->
+  <div class="main" id="main">
+    <header class="topbar">
+      <button class="icon-btn" id="foldBtn" aria-label="折叠侧边栏">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+
+      <div class="crumb">
+        <div class="c1" id="crumbTitle">首页概览</div>
+        <div class="c2" id="crumbSub">计算机与信息工程学院 · 软件工程</div>
+      </div>
+
+      <div class="gsearch" id="gsearch">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.2-3.2"/></svg>
+        <input class="input" id="gsearchInput" type="text" placeholder="搜索功能、课程、公告…" autocomplete="off">
+        <div class="gsearch-pop" id="gsearchPop"></div>
+      </div>
+
+      <button class="term-pick" id="termPick">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4.5" width="18" height="16.5" rx="2.4"/><path d="M8 2.5v4M16 2.5v4M3 10h18"/></svg>
+        <span id="termPickText">2026—2027 秋</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 9l7 7 7-7"/></svg>
+      </button>
+
+      <button class="icon-btn bell has-dot" id="btnNoti" aria-label="通知公告">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 8.5a6 6 0 1 0-12 0c0 6.5-2.5 8.5-2.5 8.5h17S18 15 18 8.5"/><path d="M13.7 20.5a2 2 0 0 1-3.4 0"/></svg>
+      </button>
+
+      <button class="icon-btn" id="btnMsg" aria-label="消息中心">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2.5" y="4.5" width="19" height="15" rx="2.4"/><path d="M3 7l9 6 9-6"/></svg>
+      </button>
+
+      <button class="user-btn" id="btnUser">
+        <span class="avatar" id="uAvatar">张</span>
+        <span>
+          <span class="un" id="uName">张明远</span>
+          <span class="ur" id="uRole">学生</span>
+        </span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 9l7 7 7-7"/></svg>
+      </button>
+    </header>
+
+    <main class="view" id="view"></main>
+  </div>
+
+  <!-- ============ 浮层 ============ -->
+  <div class="popover" id="popNoti">
+    <div class="pop-head">
+      <b>通知公告</b>
+      <button class="btn btn-text" id="notiAll" style="height:auto;padding:2px 6px">全部标记已读</button>
+    </div>
+    <div class="pop-body" id="popNotiBody"></div>
+    <div class="pop-foot"><button id="notiMore">查看全部公告 →</button></div>
+  </div>
+
+  <div class="popover" id="popMsg">
+    <div class="pop-head"><b>消息中心</b><button class="btn btn-text" id="msgAll" style="height:auto;padding:2px 6px">全部已读</button></div>
+    <div class="pop-body" id="popMsgBody"></div>
+    <div class="pop-foot"><button id="msgMore">进入消息中心 →</button></div>
+  </div>
+
+  <div class="popover" id="popUser" style="width:230px">
+    <div style="padding:14px 16px;border-bottom:1px solid var(--line)">
+      <div style="display:flex;gap:11px;align-items:center">
+        <span class="avatar" id="uAvatar2" style="width:40px;height:40px;font-size:15px">张</span>
+        <span style="min-width:0">
+          <b style="display:block;font-size:14px;color:var(--ink-900)" id="uName2">张明远</b>
+          <span style="font-size:11.5px;color:var(--ink-400)" id="uId2">2023213045</span>
+        </span>
+      </div>
+    </div>
+    <div class="user-menu" id="userMenu"></div>
+  </div>
+
+  <div class="toast-host" id="toastHost"></div>
+  <div id="modalHost"></div>
+</div>
+
+<script src="assets/js/core.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/views.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

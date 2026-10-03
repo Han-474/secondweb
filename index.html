@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>河南师范大学 · 教务管理系统 — 登录</title>
+<meta name="description" content="河南师范大学教务管理系统：选课报名、成绩课表查询、考务与学籍服务一站式平台。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%232b51c0'/%3E%3Cpath d='M8 21c3.2-2.6 6.4-2.6 8 0 1.6-2.6 4.8-2.6 8 0' stroke='%23fff' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3Cpath d='M16 10v8' stroke='%237fe3c0' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/login.css">
+</head>
+<body>
+
+<div class="login-page">
+
+  <!-- ============ 品牌视觉区 ============ -->
+  <section class="brand">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <div class="brand-top">
+      <div class="crest">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 19c2.6-2.1 5.2-2.1 6.5 0 1.3-2.1 3.9-2.1 6.5 0"/>
+          <path d="M13.5 19c.8-1.3 2.3-2.1 4.5-2.1"/>
+          <path d="M12 5.5 9.6 7.1v3.3c0 1.6 1 2.9 2.4 3.5 1.4-.6 2.4-1.9 2.4-3.5V7.1z"/>
+          <path d="M12 5.5V3.4"/>
+        </svg>
+      </div>
+      <div class="school">
+        河南师范大学
+        <small>Henan Normal University</small>
+      </div>
+    </div>
+
+    <div class="brand-mid">
+      <div class="eyebrow"><i></i>2026—2027 学年 秋季学期 · 系统运行中</div>
+      <h1>教务管理<br><em>一站式服务平台</em></h1>
+      <p class="lead">
+        选课报名、成绩课表、考务安排、学籍服务、教学评价——
+        把繁琐的教务流程，收进一个清爽的界面里。
+      </p>
+      <div class="chips">
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>报名服务</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.2-3.2"/></svg>信息查询</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 19V5"/><path d="M4 19h16"/><path d="M8 15v-4M12 15V8M16 15v-6"/></svg>成绩分析</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg>考务安排</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3l2.4 4.9 5.4.8-3.9 3.8.9 5.4-4.8-2.5-4.8 2.5.9-5.4L4.2 8.7l5.4-.8z"/></svg>教学评价</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4.5 8-11V5l-8-3-8 3v6c0 6.5 8 11 8 11z"/></svg>学籍服务</span>
+      </div>
+    </div>
+
+    <div class="brand-bottom">
+      <div class="motto">厚德博学 · 止于至善</div>
+      <div class="brand-stats">
+        <div><div class="v num" data-count="1923">1923</div><div class="k">建校年份</div></div>
+        <div><div class="v num" data-count="3">3</div><div class="k">校区协同</div></div>
+        <div><div class="v num" data-count="25">25</div><div class="k">教学学院</div></div>
+        <div><div class="v num" data-count="48000">48000</div><div class="k">在校师生</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 表单区 ============ -->
+  <section class="auth">
+    <div class="auth-inner">
+
+      <h2>欢迎回来</h2>
+      <p class="hello">请使用统一身份认证账号登录教务系统</p>
+
+      <div class="role-tabs" id="roleTabs">
+        <button class="on" data-role="student">学生</button>
+        <button data-role="teacher">教师</button>
+        <button data-role="admin">管理员</button>
+      </div>
+
+      <form class="stack" id="loginForm" novalidate autocomplete="off">
+        <label class="field">
+          <span id="uidLabel">学号</span>
+          <input class="input num" id="uid" name="uid" type="text" placeholder="请输入学号" autocomplete="username">
+        </label>
+
+        <label class="field">
+          <span>密码</span>
+          <span class="pwd-wrap">
+            <input class="input" id="pwd" name="pwd" type="password" placeholder="请输入密码" autocomplete="current-password">
+            <button type="button" class="pwd-toggle" id="pwdToggle" aria-label="显示密码">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/>
+              </svg>
+            </button>
+          </span>
+        </label>
+
+        <label class="field">
+          <span>验证码</span>
+          <span class="captcha-row">
+            <input class="input grow" id="captcha" type="text" placeholder="请输入计算结果" maxlength="4" autocomplete="off">
+            <span class="captcha-pic" id="captchaPic" title="点击刷新验证码"></span>
+          </span>
+        </label>
+
+        <div class="auth-meta">
+          <label class="checkline"><input type="checkbox" id="remember" checked> 记住账号</label>
+          <button type="button" class="btn btn-text" id="forgot">忘记密码？</button>
+        </div>
+
+        <button class="btn btn-primary btn-lg btn-block" type="submit" id="submitBtn">
+          <span>登 录</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+
+        <div class="err-tip" id="errTip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg>
+          <span id="errMsg"></span>
+        </div>
+      </form>
+
+      <div class="demo-box">
+        <div class="dh">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 6v6c0 5 3.4 9.4 8 10 4.6-.6 8-5 8-10V6z"/><path d="M9 12l2 2 4-4"/></svg>
+          演示账号 · 点击即可自动填充
+        </div>
+        <div id="demoList"></div>
+      </div>
+
+      <div class="auth-foot">
+        <div class="links">
+          <a href="#" id="helpLink">使用帮助</a>
+          <a href="#" id="browserLink">推荐浏览器</a>
+          <a href="#" id="contactLink">联系教务处</a>
+        </div>
+        <div>本系统为课程设计演示原型，数据为模拟数据，非学校官方系统。</div>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+<div class="toast-host" id="toastHost"></div>
+
+<script src="assets/js/core.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/auth.js"></script>
+</body>
+</html>
