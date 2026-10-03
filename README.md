@@ -6,37 +6,69 @@
 ## 在线访问
 
 - WorkBuddy 托管：https://htu-jwxt.app.workbuddy.host/
-- GitHub Pages：见下方「部署到 GitHub Pages」
+- GitHub Pages：https://han-474.github.io/secondweb/
 
 ## 部署到 GitHub Pages
 
-仓库里已内置 `.github/workflows/deploy-pages.yml`，推上去就会自动部署，**不需要任何构建步骤**。
+**在线地址：https://han-474.github.io/secondweb/**
 
-步骤：
+当前用的是 **Deploy from a branch** 方式：Pages 的 Source 指向 `main` 分支根目录，
+所以**每次 `git push` 到 main，GitHub 会自动重新发布**，等 1～2 分钟刷新即可看到更新。
 
-1. 在 GitHub 新建一个仓库（例如 `htu-jwxt`），**不要**勾选 README / .gitignore（本地已有）
-2. 在本目录执行：
+如果要重新配置（换仓库 / 换分支），在仓库 **Settings → Pages → Build and deployment**
+里把 Source 选成 **Deploy from a branch**，Branch 选 `main`、文件夹选 `/ (root)`，点 Save。
 
-```bash
-git init
-git add .
-git commit -m "feat: 河南师范大学教务管理系统"
-git branch -M main
-git remote add origin https://github.com/<你的用户名>/htu-jwxt.git
-git push -u origin main
+> 仓库根目录的 `.nojekyll` 不能删：GitHub Pages 默认用 Jekyll 构建，会忽略以下划线开头的
+> 目录（如 `.github`），加了这个文件就按纯静态资源原样发布。
+
+### 改用 GitHub Actions 部署（可选）
+
+分支部署已经够用。如果你想要**能看到部署日志、构建失败有通知**的完整流程，
+可以改用工作流方式：
+
+1. 把 `deploy-pages.yml` 放回 `.github/workflows/` 目录（模板见本节末尾）
+2. 推送时令牌需要有 `workflow` 权限，否则 GitHub 会拒绝创建工作流文件
+3. 推送后在 **Settings → Pages → Build and deployment** 把 Source 改成 **GitHub Actions**
+4. 之后每次 push 会触发 Actions，日志在仓库 **Actions** 标签页查看
+
+工作流模板（`deploy-pages.yml`）：
+
+```yaml
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+  deploy:
+    needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
 ```
-
-3. 进入仓库 **Settings → Pages → Build and deployment**，把 **Source** 改成 **GitHub Actions**（只需设置一次）
-4. 推送后 Actions 会自动跑，完成后在 Settings → Pages 顶部看到访问地址：
-
-```
-https://<你的用户名>.github.io/htu-jwxt/
-```
-
-之后每次 `git push` 都会自动更新线上站点。也可以去仓库 **Actions** 页手动点 `Run workflow` 重新部署。
-
-> 说明：项目全部使用相对路径引用资源，所以放在子路径（`用户名.github.io/htu-jwxt/`）下也能正常工作。
-> 如果想直接用 `用户名.github.io` 这种根域名访问，把仓库名改成 `<用户名>.github.io` 即可，其余步骤不变。
 
 ### 绑定自己的域名（可选）
 
@@ -89,9 +121,6 @@ npx serve .
 htu-jwxt/
 ├─ index.html              登录页
 ├─ app.html                主应用（SPA，hash 路由）
-├─ .github/
-│  └─ workflows/
-│     └─ deploy-pages.yml GitHub Pages 自动部署工作流
 ├─ .nojekyll               禁用 Jekyll，避免下划线目录被忽略
 ├─ assets/
 │  ├─ css/
